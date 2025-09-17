@@ -5,7 +5,7 @@ import aiohttp
 import os
 from datetime import datetime
 from typing import Dict, Set
-from .tracking import StudentTracker
+from tracking import StudentTracker
 
 class MinecraftWebSocketServer:
     def __init__(self):

@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import os
 from typing import Optional
-from .ai_provider import get_ai_provider
+from ai_provider import get_ai_provider
 from .search import find_relevant_docs, initialize_search
 
 class ChatRequest(BaseModel):
