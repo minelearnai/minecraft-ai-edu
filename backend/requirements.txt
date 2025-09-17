@@ -1,8 +1,6 @@
-fastapi==0.104.1
-uvicorn[standard]==0.24.0
+fastapi==0.115.2
+uvicorn==0.30.6
+elasticsearch==8.15.1
+aiohttp==3.9.1
 pydantic==2.5.0
-elasticsearch==8.11.0
-pymongo==4.6.0
-pytest==7.4.3
-httpx==0.25.2
-python-dotenv==1.0.0aiohttp
+python-dotenv==1.0.0
