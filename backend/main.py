@@ -3,7 +3,7 @@ from pydantic import BaseModel
 import os
 from typing import Optional
 from ai_provider import get_ai_provider
-from .search import find_relevant_docs, initialize_search
+from search import find_relevant_docs, initialize_search
 
 class ChatRequest(BaseModel):
     user_id: str
@@ -66,7 +66,7 @@ async def chat(request: ChatRequest):
 async def knowledge_status():
     """Check knowledge base status"""
     try:
-        from .search import get_document_count
+        from search import get_document_count
         count = await get_document_count()
         return {"status": "ok", "document_count": count}
     except Exception as e:
