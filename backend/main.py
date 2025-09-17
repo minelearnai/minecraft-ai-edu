@@ -201,7 +201,8 @@ async def stream_chat(request: ChatRequest):
                 max_tokens=ai_config.max_tokens,
                 temperature=ai_config.temperature
             ):
-                yield f"data: {{\"content\": \"{chunk.replace('"', '\\"')}\", \"type\": \"chunk\"}}\n\n"
+                chunk_escaped = chunk.replace('"', '\\"')
+                yield f"data: {{\"content\": \"{chunk_escaped}\", \"type\": \"chunk\"}}\\n\\n"
             
             # Send completion signal
             yield f"data: {{\"type\": \"done\", \"provider\": \"{provider.provider_name}\"}}\n\n"
