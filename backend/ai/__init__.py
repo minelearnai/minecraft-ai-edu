@@ -1,5 +1,5 @@
 from .factory import AIProviderFactory
-from .base import BaseAIProvider, ChatMessage, ChatResponse
+from .base import BaseAIProvider, ChatMessage, ChatResponse, MessageRole
 from .config import AIConfig
 
 __all__ = [
@@ -7,5 +7,6 @@ __all__ = [
     'BaseAIProvider', 
     'ChatMessage',
     'ChatResponse',
+    'MessageRole',
     'AIConfig'
 ]
