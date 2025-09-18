@@ -1,0 +1,151 @@
+{
+  "name": "Minecraft AI Edu - Backend",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "backend",
+  "workspaceFolder": "/workspace",
+  "shutdownAction": "stopCompose",
+  
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "configureZshAsDefaultShell": true,
+      "installOhMyZsh": true
+    }
+  },
+  
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.flake8",
+        "ms-python.mypy-type-checker",
+        "ms-toolsai.jupyter",
+        "ms-vscode.vscode-json",
+        "redhat.vscode-yaml",
+        "ms-azuretools.vscode-docker",
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "ms-python.black-formatter",
+        "ms-python.isort",
+        "charliermarsh.ruff",
+        "ms-vscode.test-adapter-converter",
+        "littlefoxteam.vscode-python-test-adapter",
+        "tamasfe.even-better-toml",
+        "coenraads.bracket-pair-colorizer-2",
+        "usernamehw.errorlens",
+        "gruntfuggly.todo-tree",
+        "eamodio.gitlens",
+        "ms-vscode.vscode-typescript-next",
+        "bradlc.vscode-tailwindcss",
+        "formulahendry.auto-rename-tag",
+        "esbenp.prettier-vscode",
+        "humao.rest-client"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.linting.enabled": true,
+        "python.linting.flake8Enabled": true,
+        "python.linting.mypyEnabled": true,
+        "python.formatting.provider": "black",
+        "python.formatting.blackArgs": ["--line-length=88"],
+        "python.sortImports.args": ["--profile", "black"],
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.organizeImports": true
+        },
+        "files.exclude": {
+          "**/__pycache__": true,
+          "**/*.pyc": true,
+          "**/.pytest_cache": true,
+          "**/.coverage": true,
+          "**/htmlcov": true
+        },
+        "python.testing.pytestEnabled": true,
+        "python.testing.pytestArgs": [
+          "tests/",
+          "-v"
+        ],
+        "python.testing.unittestEnabled": false,
+        "terminal.integrated.shell.linux": "/bin/zsh",
+        "git.autofetch": true,
+        "git.confirmSync": false,
+        "workbench.colorTheme": "Dark+ (default dark)",
+        "workbench.iconTheme": "vscode-icons",
+        "editor.minimap.enabled": true,
+        "editor.rulers": [88, 120],
+        "files.trimTrailingWhitespace": true,
+        "files.insertFinalNewline": true,
+        "editor.renderWhitespace": "boundary",
+        "todo-tree.general.tags": [
+          "BUG",
+          "HACK",
+          "FIXME",
+          "TODO",
+          "XXX",
+          "[ ]",
+          "[x]"
+        ],
+        "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^)\\s*($TAGS)|^\\s*- \\[ \\])",
+        "errorLens.enabledDiagnosticLevels": ["error", "warning", "info"],
+        "gitlens.currentLine.enabled": false,
+        "gitlens.hovers.currentLine.over": "line"
+      }
+    }
+  },
+  
+  "forwardPorts": [8000, 9200, 27017, 6379, 3001],
+  "portsAttributes": {
+    "8000": {
+      "label": "Backend API",
+      "onAutoForward": "notify"
+    },
+    "9200": {
+      "label": "Elasticsearch",
+      "onAutoForward": "silent"
+    },
+    "27017": {
+      "label": "MongoDB",
+      "onAutoForward": "silent"
+    },
+    "6379": {
+      "label": "Redis",
+      "onAutoForward": "silent"
+    },
+    "3001": {
+      "label": "Middleware WebSocket",
+      "onAutoForward": "notify"
+    }
+  },
+  
+  "postCreateCommand": [
+    "/bin/bash",
+    "-c",
+    "pip install --upgrade pip && pip install -r requirements.txt && pip install pytest-asyncio pytest-cov black flake8 mypy && echo '✅ Dev container setup complete!'"
+  ],
+  
+  "postStartCommand": [
+    "/bin/bash",
+    "-c",
+    "echo '✨ Starting Minecraft AI Edu development environment...' && echo 'Backend: http://localhost:8000' && echo 'Elasticsearch: http://localhost:9200' && echo 'MongoDB: mongodb://localhost:27017'"
+  ],
+  
+  "remoteEnv": {
+    "PYTHONPATH": "/workspace",
+    "ENVIRONMENT": "development",
+    "DEBUG": "true",
+    "LOG_LEVEL": "debug"
+  },
+  
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+    "source=minecraft-ai-venv,target=/venv,type=volume"
+  ],
+  
+  "containerEnv": {
+    "VIRTUAL_ENV": "/venv",
+    "PATH": "/venv/bin:${PATH}"
+  }
+}
