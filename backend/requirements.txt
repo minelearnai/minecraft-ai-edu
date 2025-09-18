@@ -1,9 +1,41 @@
+# Core FastAPI dependencies
 fastapi==0.115.2
 uvicorn==0.30.6
+
+# Database and Search
 elasticsearch==8.15.1
-aiohttp==3.9.1
-pydantic==2.5.0
-python-dotenv==1.0.0
+motor==3.3.2
+redis==5.0.1
+
+# AI/ML providers
 openai==1.51.0
 anthropic==0.34.2
+google-cloud-aiplatform==1.60.0
+google-auth==2.25.2
+
+# HTTP and async
+aiohttp==3.9.1
+httpx==0.25.2
 requests==2.31.0
+
+# Data validation and parsing
+pydantic==2.5.0
+python-dotenv==1.0.0
+pyyaml==6.0.1
+
+# Logging and monitoring
+structlog==23.2.0
+
+# Security
+pyjwt==2.8.0
+passlib[bcrypt]==1.7.4
+
+# Development dependencies
+flake8==6.1.0
+mypy==1.7.1
+types-requests==2.31.0.10
+pytest==7.4.3
+pytest-asyncio==0.21.1
+pytest-cov==4.1.0
+black==23.11.0
+isort==5.12.0
